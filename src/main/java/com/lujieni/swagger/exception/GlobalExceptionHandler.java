@@ -53,17 +53,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public R validationBodyException(MethodArgumentNotValidException exception){
-        BindingResult result = exception.getBindingResult();
-        if (result.hasErrors()) {
-            List<ObjectError> errors = result.getAllErrors();
-
-            errors.forEach(p ->{
-                FieldError fieldError = (FieldError) p;
-                log.error("Data check failure : object:{},field:{},errorMessage:{}"
-                		,fieldError.getObjectName(),fieldError.getField(),fieldError.getDefaultMessage());
-            });
-        }
-        return R.error("请填写正确信息");
+        FieldError fieldError = exception.getBindingResult().getFieldError();
+        log.error(fieldError.getField() + ":" + fieldError.getDefaultMessage());
+        return R.error(fieldError.getDefaultMessage());
     }
 
     /**

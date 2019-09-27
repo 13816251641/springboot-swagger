@@ -38,16 +38,14 @@ public class ZooEndpoint {
         return  R.ok();
     }
 
-    @PostMapping(value = "/zoo")
+    @PostMapping(value = "/add")
     @ApiOperation(value="创建动物园")
-    public R create(@RequestBody ZooDTO zooDTO){
+    public R create(@Valid @RequestBody ZooDTO zooDTO){
         System.out.println("hello");
         ZooEntity zooEntity = dozerBeanMapper.map(zooDTO, ZooEntity.class);
         list.add(zooEntity);
         return R.ok();
     }
-
-
 
 
 }
