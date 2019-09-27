@@ -2,12 +2,14 @@ package com.lujieni.swagger.controller;
 
 import com.lujieni.swagger.dto.ZooDTO;
 import com.lujieni.swagger.entity.ZooEntity;
+import com.lujieni.swagger.util.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,23 +29,22 @@ public class ZooEndpoint {
 
     @GetMapping(value = "/by_name")
     @ApiOperation(value="根据name查询动物园")
-    public ZooDTO queryZoo(String name){
+    public R<ZooDTO> queryZoo(String name){
         for (ZooEntity zooEntity : list) {
             if(zooEntity.getName().equals(name)) {
-                return dozerBeanMapper.map(zooEntity, ZooDTO.class);
+                return R.ok(dozerBeanMapper.map(zooEntity, ZooDTO.class));
             }
         }
-        return  null;
+        return  R.ok();
     }
 
     @PostMapping(value = "/zoo")
     @ApiOperation(value="创建动物园")
-    public void create(@RequestBody ZooDTO zooDTO){
+    public R create(@RequestBody ZooDTO zooDTO){
         System.out.println("hello");
         ZooEntity zooEntity = dozerBeanMapper.map(zooDTO, ZooEntity.class);
         list.add(zooEntity);
-        System.out.println(zooEntity);
-        System.out.println("创建成功");
+        return R.ok();
     }
 
 
