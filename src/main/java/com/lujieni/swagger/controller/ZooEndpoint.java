@@ -5,6 +5,7 @@ import com.lujieni.swagger.entity.ZooEntity;
 import com.lujieni.swagger.util.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class ZooEndpoint {
 
     @GetMapping(value = "/by_name")
     @ApiOperation(value="根据name查询动物园")
-    public R<ZooDTO> queryZoo(String name){
+    public R<ZooDTO> queryZoo(@ApiParam(value = "动物园名字")@RequestParam String name){
         for (ZooEntity zooEntity : list) {
             if(zooEntity.getName().equals(name)) {
                 return R.ok(dozerBeanMapper.map(zooEntity, ZooDTO.class));
@@ -46,6 +47,4 @@ public class ZooEndpoint {
         list.add(zooEntity);
         return R.ok();
     }
-
-
 }

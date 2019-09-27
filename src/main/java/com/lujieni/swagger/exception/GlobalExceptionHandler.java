@@ -3,16 +3,13 @@ package com.lujieni.swagger.exception;
 import com.lujieni.swagger.util.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageConversionException;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 
 /**
@@ -34,7 +31,7 @@ public class GlobalExceptionHandler {
 
 
 	/**
-	 * 全局异常
+	 * 全局异常  如果require=true但参数为null会被这个方法捕获
 	 * @param e
 	 * @param httpRequest
 	 * @return
