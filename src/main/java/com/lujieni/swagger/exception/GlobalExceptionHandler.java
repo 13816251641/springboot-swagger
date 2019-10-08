@@ -31,7 +31,9 @@ public class GlobalExceptionHandler {
 
 
 	/**
-	 * 全局异常  如果require=true但参数为null会被这个方法捕获
+	 * 全局异常
+	 * 如果require=true但参数为null会被这个方法捕获
+	 * 如果@NotBlank标签用于非String类型的字段上会被捕获
 	 * @param e
 	 * @param httpRequest
 	 * @return
@@ -57,6 +59,7 @@ public class GlobalExceptionHandler {
 
     /**
      * 参数类型转换错误
+	 * 后端要求是date类型,前端传入"12a"会进入此异常
      *
      * @param exception 错误
      * @return 错误信息
