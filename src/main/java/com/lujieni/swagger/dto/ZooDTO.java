@@ -13,15 +13,15 @@ import java.util.Date;
 @Data
 @ApiModel("动物园DTO")
 public class ZooDTO {
-    @ApiModelProperty(value = "动物园名称",required = true)//required = true显示有红*,但没强制作用
+    /* required = true 显示有红*,但没强制作用 */
+    @ApiModelProperty(value = "动物园名称",required = true,example = "西郊公园")
     @NotBlank(message = "动物园名称不能为空")
     private String name;
 
-    @ApiModelProperty(value = "日期",required = true)
-    //@NotBlank
+    @ApiModelProperty(value = "日期",required = true,example = "yyyy-MM-dd")
+    /* @NotBlank注释只能适用于String类型的字段上 */
     //@Pattern(regexp ="^\\d{4}-\\d{2}-\\d{2}$",message = "日期字段必须为yyyy-MM-dd格式")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
-
 
 }
